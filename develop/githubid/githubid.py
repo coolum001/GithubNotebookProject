@@ -4,7 +4,7 @@
 import os
 import subprocess
 
-def git_version(git_location = None):
+def get_repo_version(git_location = None):
     '''
     Returns a tuple containing identification of the git repository containing the calling source code
     
@@ -19,7 +19,8 @@ def git_version(git_location = None):
     
     GIT_REVISION contains the long version of the git id (eg f83a90d8335eb9c5dce01781e66cbe7bd9ed8b92)
     
-    GIT_TAGS contains the infotmation about the most recent tag (release) if any
+    GIT_TAGS contains the information about the most recent tag (release) if any,
+    in the form "v1.0-11-gacf3e94"
     
     GIT_REVSHORT contains a short version of the version id, like f83a90d  (this may include tag information)
     
@@ -27,6 +28,17 @@ def git_version(git_location = None):
     
     GIT_REMOTE contains the path to the remote git repository
     
+    Outputs:
+    If an OSError exception is seen, function outputs a diagnostic of form on standard output
+    
+    OS Error in getting GIT revision using: 
+    followed by git executable as supplied
+    
+    Error Conditions:
+    If the call to the supplied git executable fails with an OSError exception,
+    the string "Unknown" is returned for the corresponding member of the tuple
+    
+    If the supplied git executable path is == None, an assertion error is thrown
     '''
     assert not( git_location == None), 'git executable location not supplied'
     
@@ -111,4 +123,4 @@ def git_version(git_location = None):
     #end try
 
     return (GIT_BRANCH, GIT_REVISION, GIT_TAGS, GIT_REVSHORT, GIT_REPOSITORY, GIT_REMOTE)
-#end get_version
+#end get_repo_version
