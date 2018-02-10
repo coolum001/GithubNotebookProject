@@ -1,4 +1,4 @@
-# Return the git revision as a string
+# Return the repo revision information as a tuple of strings
 # refer to https://stackoverflow.com/questions/14989858/get-the-current-git-hash-in-a-python-script
 
 import os
@@ -68,7 +68,7 @@ def get_repo_version(git_location = None):
         out = _minimal_ext_cmd([git_location, 'rev-parse', 'HEAD'])
         GIT_REVISION = out.strip().decode('ascii')
     except OSError as e:
-        print(' OS Error in getting GIT revision using: '+GIT_LOCATION, e)
+        print(' OS Error in getting GIT revision using: '+git_location, e)
         GIT_REVISION = "Unknown"
     #end try
     
@@ -77,7 +77,7 @@ def get_repo_version(git_location = None):
         out = _minimal_ext_cmd([git_location, 'symbolic-ref', 'HEAD'])
         GIT_BRANCH = out.strip().decode('ascii')
     except OSError as e:
-        print(' OS Error in getting GIT branch using: '+GIT_LOCATION, e)
+        print(' OS Error in getting GIT branch using: '+git_location, e)
         GIT_BRANCH = "Unknown"
     #end try
     
@@ -87,7 +87,7 @@ def get_repo_version(git_location = None):
         out = _minimal_ext_cmd([git_location, 'describe', '--always'])
         GIT_REVSHORT = out.strip().decode('ascii')
     except OSError as e:
-        print(' OS Error in getting GIT short revision using: '+GIT_LOCATION, e)
+        print(' OS Error in getting GIT short revision using: '+git_location, e)
         GIT_REVSHORT = "Unknown"
     #end try
     
@@ -96,7 +96,7 @@ def get_repo_version(git_location = None):
         out = _minimal_ext_cmd([git_location, 'rev-parse', '--show-toplevel'])
         GIT_REPOSITORY = out.strip().decode('ascii')
     except OSError as e:
-        print(' OS Error in getting GIT local repository name using: '+GIT_LOCATION, e)
+        print(' OS Error in getting GIT local repository name using: '+git_location, e)
         GIT_REPOSITORY = "Unknown"
     #end try
     
@@ -107,7 +107,7 @@ def get_repo_version(git_location = None):
         # decode binary array to ascii, split on newlines, split line 0 on blank, skip first 6 chars
         GIT_REMOTE = out.strip().decode('ascii').split('\n')[0].split(' ')[0][7:]
     except OSError as e:
-        print(' OS Error in getting GIT remote repository name using: '+GIT_LOCATION, e)
+        print(' OS Error in getting GIT remote repository name using: '+git_location, e)
         GIT_REMOTE = "Unknown"
     #end try
     
@@ -118,7 +118,7 @@ def get_repo_version(git_location = None):
         # decode binary array to ascii,
         GIT_TAGS = out.strip().decode('ascii')
     except OSError as e:
-        print(' OS Error in getting GIT tags information using: '+GIT_LOCATION, e)
+        print(' OS Error in getting GIT tags information using: '+git_location, e)
         GIT_TAGS = "Unknown"
     #end try
 

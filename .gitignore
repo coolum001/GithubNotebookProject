@@ -52,3 +52,6 @@ figures/Visible.txt
 
 # python cache directory
 develop/githubid/__pycache__/
+
+# pytest cache directory
+develop/.cache/
